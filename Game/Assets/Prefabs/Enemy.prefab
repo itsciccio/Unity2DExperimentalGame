@@ -388,6 +388,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 100
+  damageToPlayer: 25
+  spriteRenderer: {fileID: 298963756273886670}
   deathPrefab: {fileID: 8407410870283011840, guid: 55392c905633b9744afe7a480f31496f,
     type: 3}
   healthUI: {fileID: 298963756141114694}

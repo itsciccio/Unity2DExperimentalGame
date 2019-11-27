@@ -67,6 +67,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 298963756100840976, guid: fdc283d979095d34b8c095a042343fa2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 298963756100840976, guid: fdc283d979095d34b8c095a042343fa2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 298963756273886668, guid: fdc283d979095d34b8c095a042343fa2,
         type: 3}
       propertyPath: maxHealth
@@ -77,15 +87,10 @@ PrefabInstance:
       propertyPath: health
       value: 1000
       objectReference: {fileID: 0}
-    - target: {fileID: 298963756100840976, guid: fdc283d979095d34b8c095a042343fa2,
+    - target: {fileID: 298963756273886668, guid: fdc283d979095d34b8c095a042343fa2,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 298963756100840976, guid: fdc283d979095d34b8c095a042343fa2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      propertyPath: damageToPlayer
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdc283d979095d34b8c095a042343fa2, type: 3}
