@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject deathPrefab;
     public PlayerShoot playerShoot;
     public Slider slider;
+    Vector3 playerVelocity;
 
     public float speed;
     public float jumpHeight;
@@ -23,11 +24,12 @@ public class PlayerMovement : MonoBehaviour {
     public int healthRegenRate = 2;
     public float spikeDamage = 15;
     public float regenTimer = 0f;
+    private float dotProduct;
 
     bool RegeningHealth = false;
     bool damageOverTime = false;
     bool deathCompleted = false;
-    bool disableGun = false;
+    //bool disableGun = false;
     int jumps;
 
     void Start()
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
+
         slider.value = healthPercent();
 
         healthText.text = "HP: " + health;
@@ -56,10 +59,29 @@ public class PlayerMovement : MonoBehaviour {
             StartCoroutine(Die());
         }
 
+        /*Vector2 movement = new Vector2(moveHorizontal, 0);
+        rb2d.MovePosition(rb2d.position + (movement * speed * Time.fixedDeltaTime));
+
+        animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));*/
+
         float moveHorizontal = Input.GetAxis("Horizontal") * speed * Time.fixedDeltaTime;
 
+        playerVelocity = rb2d.velocity;
+        dotProduct = Vector3.Dot(-gameObject.transform.up, playerVelocity);
+
+        if (dotProduct < 0)
+        {
+            animator.SetBool("JumpUp", true);
+        }
+        else
+        {
+            animator.SetBool("JumpUp", false);
+        }
+
+        //Debug.Log(dotProduct);
+
         Vector2 movement = new Vector2(moveHorizontal, 0);
-        rb2d.AddForce(movement);
+        rb2d.AddForce(movement);        
 
         animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
 
@@ -75,6 +97,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (collision.gameObject.tag == "ground")
         {
+            animator.SetBool("Jumping", false);
             jumps = maxJumps;
         }
 
@@ -106,6 +129,8 @@ public class PlayerMovement : MonoBehaviour {
         if (jumps > 0)
         {
             rb2d.AddForce(new Vector2(0, jumpHeight) * Time.deltaTime, ForceMode2D.Impulse);
+            animator.SetBool("Jumping", true);
+            animator.SetBool("JumpUp", true);
             jumps--;
         }
         if (jumps == 0) {
